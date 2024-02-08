@@ -1,0 +1,157 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\b\f0\fs22\lang9 Q1\b0\par
+mysql> select * from student;\par
++-----+------+------+---------+--------+------+------------+------+\par
+| sid | name | age  | subject | city   | year | percentage | tid  |\par
++-----+------+------+---------+--------+------+------------+------+\par
+|   1 | A    |   20 | CS      | Pune   | 2020 |      70.50 |    1 |\par
+|   2 | B    |   21 | IT      | Pune   | 2020 |      75.50 |    2 |\par
+|   3 | C    |   19 | IT      | Mumbai | 2022 |      75.50 |    3 |\par
+|   4 | D    |   22 | CS      | Mumbai | 2022 |      80.00 |    4 |\par
+|   5 | E    |   22 | CS      | Mumbai | 2020 |      65.50 |    5 |\par
+|   6 | H    |   23 | CS      | Mumbai | 2021 |      30.00 |    6 |\par
+|   7 | F    |   23 | IT      | Pune   | 2020 |      90.00 |    7 |\par
+|   8 | G    |   25 | CS      | Mumbai | 2021 |      75.00 |    8 |\par
++-----+------+------+---------+--------+------+------------+------+\par
+8 rows in set (0.00 sec)\par
+mysql> desc student;\par
++------------+--------------+------+-----+---------+----------------+\par
+| Field      | Type         | Null | Key | Default | Extra          |\par
++------------+--------------+------+-----+---------+----------------+\par
+| sid        | int          | NO   | PRI | NULL    | auto_increment |\par
+| name       | varchar(30)  | YES  |     | NULL    |                |\par
+| age        | int          | YES  |     | NULL    |                |\par
+| subject    | varchar(30)  | YES  |     | NULL    |                |\par
+| city       | varchar(30)  | YES  |     | NULL    |                |\par
+| year       | int          | YES  |     | NULL    |                |\par
+| percentage | decimal(5,2) | YES  |     | NULL    |                |\par
+| tid        | int          | YES  | MUL | NULL    |                |\par
++------------+--------------+------+-----+---------+----------------+\par
+8 rows in set (0.00 sec)\par
+\par
+\b Q2\b0\par
+mysql> select * from teacher;\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+| tid | name | age  | subject | city      | subject_expert   | year_of_experience | salary |\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+|   1 | A    |   30 | CS      | Ahmedabad | Computer Science |                  5 |  20000 |\par
+|   2 | AAA  |   35 | CS      | Ahmedabad | Computer Science |                  4 |  25000 |\par
+|   3 | C    |   33 | CS      | Mumbai    | Computer Science |                  2 |  30000 |\par
+|   4 | D    |   38 | IT      | Pune      | IT               |                  6 |  60000 |\par
+|   5 | E    |   33 | IT      | Pune      | IT               |                  8 |  80000 |\par
+|   6 | H    |   31 | IT      | Pune      | IT               |                  1 |  25000 |\par
+|   7 | F    |   38 | IT      | Mumbai    | Computer Science |                  5 |  23000 |\par
+|   8 | G    |   32 | IT      | Pune      | Computer Science |                  5 |  55000 |\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+8 rows in set (0.00 sec)\par
+mysql> desc teacher;\par
++--------------------+-------------+------+-----+---------+----------------+\par
+| Field              | Type        | Null | Key | Default | Extra          |\par
++--------------------+-------------+------+-----+---------+----------------+\par
+| tid                | int         | NO   | PRI | NULL    | auto_increment |\par
+| name               | varchar(30) | YES  |     | NULL    |                |\par
+| age                | int         | YES  |     | NULL    |                |\par
+| subject            | varchar(30) | YES  |     | NULL    |                |\par
+| city               | varchar(30) | YES  |     | NULL    |                |\par
+| subject_expert     | varchar(30) | YES  |     | NULL    |                |\par
+| year_of_experience | int         | YES  |     | NULL    |                |\par
+| salary             | int         | YES  |     | NULL    |                |\par
++--------------------+-------------+------+-----+---------+----------------+\par
+8 rows in set (0.00 sec)\par
+\par
+\b Q3\b0\par
+\par
+mysql> alter table student rename column course to subject;\par
+Query OK, 0 rows affected (0.03 sec)\par
+Records: 0  Duplicates: 0  Warnings: 0\par
+\par
+mysql> alter table teacher rename column course to subject;\par
+Query OK, 0 rows affected (0.04 sec)\par
+Records: 0  Duplicates: 0  Warnings: 0\par
+\par
+\b Q4\b0\par
+mysql> create table bkup_student as select * from student;\par
+Query OK, 8 rows affected (0.04 sec)\par
+Records: 8  Duplicates: 0  Warnings: 0\par
+\par
+mysql> create table bkup_teacher as select * from teacher;\par
+Query OK, 8 rows affected (0.04 sec)\par
+Records: 8  Duplicates: 0  Warnings: 0\par
+\par
+\b Q5\b0\par
+mysql> select * from student where (city="pune" or city="mumbai");\par
++-----+------+------+---------+--------+------+------------+------+\par
+| sid | name | age  | subject | city   | year | percentage | tid  |\par
++-----+------+------+---------+--------+------+------------+------+\par
+|   1 | A    |   20 | CS      | Pune   | 2020 |      70.50 |    1 |\par
+|   2 | B    |   21 | IT      | Pune   | 2020 |      75.50 | NULL |\par
+|   3 | C    |   19 | IT      | Mumbai | 2022 |      75.50 |    3 |\par
+|   4 | D    |   22 | CS      | Mumbai | 2022 |      80.00 |    4 |\par
+|   5 | E    |   22 | CS      | Mumbai | 2020 |      65.50 |    5 |\par
+|   6 | H    |   23 | CS      | Mumbai | 2021 |      30.00 |    6 |\par
+|   7 | F    |   23 | IT      | Pune   | 2020 |      90.00 |    7 |\par
+|   8 | G    |   25 | CS      | Mumbai | 2021 |      75.00 |    8 |\par
++-----+------+------+---------+--------+------+------------+------+\par
+8 rows in set (0.00 sec)\par
+\par
+\b Q6\b0\par
+mysql> select * from teacher where(city="ahmedabad" and name like "a%");\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+| tid | name | age  | subject | city      | subject_expert   | year_of_experience | salary |\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+|   1 | A    |   30 | CS      | Ahmedabad | Computer Science |                  5 |  20000 |\par
+|   2 | AAA  |   35 | CS      | Ahmedabad | Computer Science |                  4 |  25000 |\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+2 rows in set (0.00 sec)\par
+\par
+\b Q7\b0\par
+mysql> select * from teacher where(year_of_experience>=4);\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+| tid | name | age  | subject | city      | subject_expert   | year_of_experience | salary |\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+|   1 | A    |   30 | CS      | Ahmedabad | Computer Science |                  5 |  20000 |\par
+|   2 | AAA  |   35 | CS      | Ahmedabad | Computer Science |                  4 |  25000 |\par
+|   4 | D    |   38 | IT      | Pune      | IT               |                  6 |  60000 |\par
+|   5 | E    |   33 | IT      | Pune      | IT               |                  8 |  80000 |\par
+|   7 | F    |   38 | IT      | Mumbai    | Computer Science |                  5 |  23000 |\par
+|   8 | G    |   32 | IT      | Pune      | Computer Science |                  5 |  55000 |\par
++-----+------+------+---------+-----------+------------------+--------------------+--------+\par
+6 rows in set (0.00 sec)\par
+\par
+\b Q9\par
+\b0 mysql> select city,count(*) as count_of_students from student group by city;\par
++--------+-------------------+\par
+| city   | count_of_students |\par
++--------+-------------------+\par
+| Pune   |                 3 |\par
+| Mumbai |                 5 |\par
++--------+-------------------+\par
+2 rows in set (0.00 sec)\par
+\par
+\b Q10\b0\par
+mysql> select student.name,teacher.name from student join teacher on student.tid=teacher.tid where student.percentage>70 and teacher.year_of_experience>3;\par
++------+------+\par
+| name | name |\par
++------+------+\par
+| A    | A    |\par
+| B    | AAA  |\par
+| D    | D    |\par
+| F    | F    |\par
+| G    | G    |\par
++------+------+\par
+5 rows in set (0.00 sec)\par
+\par
+\b Q11\b0\par
+mysql> create table bkup_student2 like student;\par
+Query OK, 0 rows affected (0.04 sec)\par
+\par
+mysql> create table bkup_teacher2 like teacher;\par
+Query OK, 0 rows affected (0.03 sec)\par
+\par
+\b Q12\b0\par
+\par
+mysql> create table files (id int auto_increment primary key, filename varchar(30), file_type varchar(10), file_data longblob);\par
+Query OK, 0 rows affected (0.03 sec)\par
+}
+ 
